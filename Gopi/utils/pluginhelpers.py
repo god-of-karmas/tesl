@@ -33,6 +33,7 @@ def get_user(message: Message, text: str) -> [int, str, None]:
             reason_ = asplit[1]
     return user_s, reason_
 
+
 async def is_admin(event, user):
     try:
         sed = await event.client.get_permissions(event.chat_id, user)
@@ -40,6 +41,7 @@ async def is_admin(event, user):
     except:
         is_mod = False
     return is_mod
+
 
 def get_readable_time(seconds: int) -> int:
     count = 0
@@ -90,7 +92,7 @@ async def delete_or_pass(message):
 def humanbytes(size):
     if not size:
         return ""
-    power = 2 ** 10
+    power = 2**10
     raised_to_pow = 0
     dict_power_n = {0: "", 1: "Ki", 2: "Mi", 3: "Gi", 4: "Ti"}
     while size > power:
@@ -286,10 +288,7 @@ async def get_administrators(chat: Chat) -> List[User]:
         return _get
     set(
         chat.id,
-        (
-            member.user
-            for member in await chat.get_member(filter="administrators")
-        ),
+        (member.user for member in await chat.get_member(filter="administrators")),
     )
 
     return await get_administrators(chat)

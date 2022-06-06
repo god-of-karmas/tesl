@@ -32,6 +32,7 @@ def is_support_plus(chat: Chat, user_id: int, member: ChatMember = None) -> bool
 def is_sudo_plus(chat: Chat, user_id: int, member: ChatMember = None) -> bool:
     return user_id in DRAGONS or user_id in DEV_USERS
 
+
 def user_can_changeinfo(chat: Chat, user: User, bot_id: int) -> bool:
     return chat.get_member(user.id).can_change_info
 
@@ -411,4 +412,3 @@ from Gopi.modules import connection
 connected = connection.connected
 
 # Roses are red, Violets are blue, A face like yours, Belongs in a zoo
-

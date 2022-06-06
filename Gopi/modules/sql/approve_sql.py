@@ -60,5 +60,5 @@ def list_approved(chat_id):
     finally:
         SESSION.close()
 
-# Roses are red, Violets are blue, A face like yours, Belongs in a zoo
 
+# Roses are red, Violets are blue, A face like yours, Belongs in a zoo

@@ -22,7 +22,7 @@ from telegram.utils.helpers import mention_html
 def add_nsfw(update: Update, context: CallbackContext):
     chat = update.effective_chat
     msg = update.effective_message
-    user = update.effective_user #Remodified by @EverythingSuckz
+    user = update.effective_user  # Remodified by @EverythingSuckz
     is_nsfw = sql.is_nsfw(chat.id)
     if not is_nsfw:
         sql.set_nsfw(chat.id)
@@ -86,7 +86,7 @@ def wallpaper(update, context):
     msg = update.effective_message
     target = "wallpaper"
     msg.reply_photo(nekos.img(target))
-    
+
 
 def ngif(update, context):
     chat_id = update.effective_chat.id
@@ -159,7 +159,8 @@ def baka(update, context):
 ADD_NSFW_HANDLER = CommandHandler("addnsfw", add_nsfw, run_async=True)
 REMOVE_NSFW_HANDLER = CommandHandler("rmnsfw", rem_nsfw, run_async=True)
 LIST_NSFW_CHATS_HANDLER = CommandHandler(
-    "nsfwchats", list_nsfw_chats, filters=CustomFilters.dev_filter, run_async=True)
+    "nsfwchats", list_nsfw_chats, filters=CustomFilters.dev_filter, run_async=True
+)
 NEKO_HANDLER = CommandHandler("neko", neko, run_async=True)
 WALLPAPER_HANDLER = CommandHandler("wallpaper", wallpaper, run_async=True)
 NGIF_HANDLER = CommandHandler("ngif", ngif, run_async=True)

@@ -11,12 +11,12 @@ import Gopi.modules.fun_strings as fun
 from Gopi import DEMONS, DRAGONS, dispatcher
 from Gopi.modules.disable import DisableAbleCommandHandler, DisableAbleMessageHandler
 from Gopi.modules.helper_funcs.alternate import typing_action
-from Gopi.modules.helper_funcs.chat_status import (is_user_admin)
+from Gopi.modules.helper_funcs.chat_status import is_user_admin
 from Gopi.modules.helper_funcs.extraction import extract_user
 
-GN_IMG= "https://te.legra.ph/file/314c36cf0fa2c4006e9fe.jpg"
-DECIDE_IMG= "https://te.legra.ph/file/d5e4e6a1b6414b0d4444d.mp4"
-JUDGE_IMG= "https://te.legra.ph/file/d85924f1325458ed6d99e.jpg"
+GN_IMG = "https://te.legra.ph/file/314c36cf0fa2c4006e9fe.jpg"
+DECIDE_IMG = "https://te.legra.ph/file/d5e4e6a1b6414b0d4444d.mp4"
+JUDGE_IMG = "https://te.legra.ph/file/d85924f1325458ed6d99e.jpg"
 
 
 @typing_action
@@ -24,17 +24,20 @@ def goodnight(update, context):
     message = update.effective_message
     first_name = update.effective_user.first_name
     reply = f"*Hey {escape_markdown(first_name)} \nGood Night! 😴*"
-    message.reply_photo(GN_IMG,reply, parse_mode=ParseMode.MARKDOWN)
+    message.reply_photo(GN_IMG, reply, parse_mode=ParseMode.MARKDOWN)
 
-GM_IMG= "https://te.legra.ph/file/314c36cf0fa2c4006e9fe.jpg"
+
+GM_IMG = "https://te.legra.ph/file/314c36cf0fa2c4006e9fe.jpg"
+
+
 @typing_action
 def goodmorning(update, context):
     message = update.effective_message
     first_name = update.effective_user.first_name
     reply = f"*Hey {escape_markdown(first_name)} \n Good Morning!☀*"
-    message.reply_photo(GM_IMG,reply, parse_mode=ParseMode.MARKDOWN)
+    message.reply_photo(GM_IMG, reply, parse_mode=ParseMode.MARKDOWN)
 
-    
+
 def gbun(update, context):
     user = update.effective_user
     chat = update.effective_chat
@@ -73,53 +76,63 @@ def gbam(update, context):
 
 
 def judge(update, context):
-    context.bot.sendChatAction(update.effective_chat.id, "typing") # Bot typing before send messages
+    context.bot.sendChatAction(
+        update.effective_chat.id, "typing"
+    )  # Bot typing before send messages
     message = update.effective_message
     if message.reply_to_message:
-      message.reply_to_message.reply_text(random.choice(fun.JUDGE_HANDLER))
+        message.reply_to_message.reply_text(random.choice(fun.JUDGE_HANDLER))
     else:
-      message.reply_text(fun.JUDGE_STRINGS)
-      
-      
+        message.reply_text(fun.JUDGE_STRINGS)
+
+
 def alexa(update, context):
-    context.bot.sendChatAction(update.effective_chat.id, "typing") # Bot typing before send messages
+    context.bot.sendChatAction(
+        update.effective_chat.id, "typing"
+    )  # Bot typing before send messages
     message = update.effective_message
     if message.reply_to_message:
-      message.reply_to_message.reply_text(random.choice(fun.ALEXA_HANDLER))
+        message.reply_to_message.reply_text(random.choice(fun.ALEXA_HANDLER))
     else:
-      message.reply_text(fun.ALEXA_STRINGS)
+        message.reply_text(fun.ALEXA_STRINGS)
 
 
 def decide(update, context):
-    context.bot.sendChatAction(update.effective_chat.id, "typing") # Bot typing before send messages
+    context.bot.sendChatAction(
+        update.effective_chat.id, "typing"
+    )  # Bot typing before send messages
     message = update.effective_message
     if message.reply_to_message:
-      message.reply_to_message.reply_text(random.choice(fun.DECIDE_HANDLER))
+        message.reply_to_message.reply_text(random.choice(fun.DECIDE_HANDLER))
     else:
-      message.reply_text(fun.DECIDE_STRINGS)
+        message.reply_text(fun.DECIDE_STRINGS)
 
 
 @typing_action
 def repo(update, context):
     update.effective_message.reply_text(fun.REPO)
-  
+
 
 def insult(update, context):
-    context.bot.sendChatAction(update.effective_chat.id, "typing") # Bot typing before send messages
+    context.bot.sendChatAction(
+        update.effective_chat.id, "typing"
+    )  # Bot typing before send messages
     message = update.effective_message
     if message.reply_to_message:
-      message.reply_to_message.reply_text(random.choice(fun.SFW_STRINGS))
+        message.reply_to_message.reply_text(random.choice(fun.SFW_STRINGS))
     else:
-      message.reply_text(random.choice(fun.SFW_STRINGS)) 
-    
-    
+        message.reply_text(random.choice(fun.SFW_STRINGS))
+
+
 def abuse(update, context):
-    context.bot.sendChatAction(update.effective_chat.id, "typing") # Bot typing before send messages
+    context.bot.sendChatAction(
+        update.effective_chat.id, "typing"
+    )  # Bot typing before send messages
     message = update.effective_message
     if message.reply_to_message:
-      message.reply_to_message.reply_text(random.choice(fun.ABUSE_STRINGS))
+        message.reply_to_message.reply_text(random.choice(fun.ABUSE_STRINGS))
     else:
-      message.reply_text(random.choice(fun.ABUSE_STRINGS))
+        message.reply_text(random.choice(fun.ABUSE_STRINGS))
 
 
 def slap(update: Update, context: CallbackContext):
@@ -127,7 +140,11 @@ def slap(update: Update, context: CallbackContext):
     message = update.effective_message
     chat = update.effective_chat
 
-    reply_text = message.reply_to_message.reply_text if message.reply_to_message else message.reply_text
+    reply_text = (
+        message.reply_to_message.reply_text
+        if message.reply_to_message
+        else message.reply_text
+    )
 
     curr_user = html.escape(message.from_user.first_name)
     user_id = extract_user(message, args)
@@ -146,7 +163,8 @@ def slap(update: Update, context: CallbackContext):
                     chat.id,
                     message.from_user.id,
                     until_date=mutetime,
-                    permissions=ChatPermissions(can_send_messages=False))
+                    permissions=ChatPermissions(can_send_messages=False),
+                )
             reply_text(temp[0])
         else:
             reply_text(temp)
@@ -170,11 +188,10 @@ def slap(update: Update, context: CallbackContext):
     if update.effective_user.id == 1342820594:
         temp = "@AsadSupport scratches {user2}"
 
-    reply = temp.format(
-        user1=user1, user2=user2, item=item, hits=hit, throws=throw)
+    reply = temp.format(user1=user1, user2=user2, item=item, hits=hit, throws=throw)
 
-    reply_text(reply, parse_mode=ParseMode.HTML)   
-    
+    reply_text(reply, parse_mode=ParseMode.HTML)
+
 
 @typing_action
 def truth(update, context):
@@ -184,7 +201,7 @@ def truth(update, context):
 @typing_action
 def dare(update, context):
     update.effective_message.reply_text(random.choice(fun.DARE))
- 
+
 
 def pat(update: Update, context: CallbackContext):
     bot = context.bot
@@ -224,10 +241,20 @@ def pat(update: Update, context: CallbackContext):
         temp = random.choice(fun.PAT_TEMPLATES)
         reply = temp.format(user1=user1, user2=user2)
         reply_to.reply_text(reply, parse_mode=ParseMode.HTML)
-       
-    
-GOODMORNING_HANDLER = DisableAbleMessageHandler(Filters.regex(r"(?i)(goodmorning|good morning)"), goodmorning, friendly="goodmorning", run_async=True)
-GOODNIGHT_HANDLER = DisableAbleMessageHandler(Filters.regex(r"(?i)(goodnight|good night)"), goodnight, friendly="goodnight", run_async=True)
+
+
+GOODMORNING_HANDLER = DisableAbleMessageHandler(
+    Filters.regex(r"(?i)(goodmorning|good morning)"),
+    goodmorning,
+    friendly="goodmorning",
+    run_async=True,
+)
+GOODNIGHT_HANDLER = DisableAbleMessageHandler(
+    Filters.regex(r"(?i)(goodnight|good night)"),
+    goodnight,
+    friendly="goodnight",
+    run_async=True,
+)
 DECIDE_HANDLER = DisableAbleCommandHandler("decide", decide)
 
 REPO_HANDLER = DisableAbleCommandHandler("repo", repo, run_async=True)

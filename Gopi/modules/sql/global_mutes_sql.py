@@ -20,9 +20,7 @@ class GloballyMutedUsers(BASE):
         return "<GMuted User {} ({})>".format(self.name, self.user_id)
 
     def to_dict(self):
-        return {"user_id": self.user_id,
-                "name": self.name,
-                "reason": self.reason}
+        return {"user_id": self.user_id, "name": self.name, "reason": self.reason}
 
 
 class GmuteSettings(BASE):
@@ -146,7 +144,9 @@ def __load_gmuted_userid_list():
 def __load_gmute_stat_list():
     global GMUTESTAT_LIST
     try:
-        GMUTESTAT_LIST = {x.chat_id for x in SESSION.query(GmuteSettings).all() if not x.setting}
+        GMUTESTAT_LIST = {
+            x.chat_id for x in SESSION.query(GmuteSettings).all() if not x.setting
+        }
     finally:
         SESSION.close()
 
@@ -167,4 +167,3 @@ __load_gmute_stat_list()
 
 
 # Roses are red, Violets are blue, A face like yours, Belongs in a zoo
-

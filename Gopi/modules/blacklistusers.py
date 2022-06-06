@@ -1,10 +1,8 @@
 import html
 import Gopi.modules.sql.blacklistusers_sql as sql
-from Gopi import (DEV_USERS, OWNER_ID, DRAGONS, DEMONS, TIGERS, WOLVES,
-                          dispatcher)
+from Gopi import DEV_USERS, OWNER_ID, DRAGONS, DEMONS, TIGERS, WOLVES, dispatcher
 from Gopi.modules.helper_funcs.chat_status import dev_plus
-from Gopi.modules.helper_funcs.extraction import (extract_user,
-                                                          extract_user_and_text)
+from Gopi.modules.helper_funcs.extraction import extract_user, extract_user_and_text
 from Gopi.modules.log_channel import gloggable
 from telegram import ParseMode, Update
 from telegram.error import BadRequest
@@ -28,8 +26,7 @@ def bl_user(update: Update, context: CallbackContext) -> str:
         return ""
 
     if user_id == bot.id:
-        message.reply_text(
-            "How am I supposed to do my work if I am ignoring myself?")
+        message.reply_text("How am I supposed to do my work if I am ignoring myself?")
         return ""
 
     if user_id in BLACKLISTWHITELIST:
@@ -113,14 +110,13 @@ def bl_users(update: Update, context: CallbackContext):
                 f"• {mention_html(user.id, html.escape(user.first_name))} :- {reason}"
             )
         else:
-            users.append(
-                f"• {mention_html(user.id, html.escape(user.first_name))}")
+            users.append(f"• {mention_html(user.id, html.escape(user.first_name))}")
 
     message = "<b>Blacklisted Users</b>\n"
     if not users:
         message += "Noone is being ignored as of yet."
     else:
-        message += '\n'.join(users)
+        message += "\n".join(users)
 
     update.effective_message.reply_text(message, parse_mode=ParseMode.HTML)
 

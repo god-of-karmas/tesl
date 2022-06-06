@@ -39,8 +39,8 @@ from Gopi.modules.helper_funcs.extraction import extract_user_and_text
 from Gopi.modules.helper_funcs.string_handling import extract_time
 from Gopi.modules.log_channel import gloggable, loggable
 
-UNBAN_IMG= "https://telegra.ph/file/b017dc397c6895a201170.mp4"
-BAN_IMG= "https://telegra.ph/file/8feebcd2309655661e0c9.mp4"
+UNBAN_IMG = "https://telegra.ph/file/b017dc397c6895a201170.mp4"
+BAN_IMG = "https://telegra.ph/file/8feebcd2309655661e0c9.mp4"
 
 
 @connection_status
@@ -127,17 +127,23 @@ def ban(update: Update, context: CallbackContext) -> str:
             reply += f"\n<code> </code><b>• Reason:</b> \n{html.escape(reason)}"
 
         bot.send_video(
-            chat.id, BAN_IMG,caption=reply,
+            chat.id,
+            BAN_IMG,
+            caption=reply,
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
-       InlineKeyboardButton(text="❕Unban", callback_data=f"unbanb_unban={user_id}"),
-       InlineKeyboardButton(text="❌ Delete", callback_data="unbanb_del"),
+                        InlineKeyboardButton(
+                            text="❕Unban", callback_data=f"unbanb_unban={user_id}"
+                        ),
+                        InlineKeyboardButton(
+                            text="❌ Delete", callback_data="unbanb_del"
+                        ),
                     ]
                 ]
             ),
             parse_mode=ParseMode.HTML,
-            )
+        )
         return log
 
     except BadRequest as excp:
@@ -239,7 +245,9 @@ def temp_ban(update: Update, context: CallbackContext) -> str:
                         InlineKeyboardButton(
                             text="❕Unban", callback_data=f"unbanb_unban={user_id}"
                         ),
-                        InlineKeyboardButton(text="❌ Delete", callback_data="unbanb_del"),
+                        InlineKeyboardButton(
+                            text="❌ Delete", callback_data="unbanb_del"
+                        ),
                     ]
                 ]
             ),
@@ -266,13 +274,6 @@ def temp_ban(update: Update, context: CallbackContext) -> str:
             message.reply_text("Well damn, I can't ban that user.")
 
     return log_message
-    
- 
-
-    
-
-
-
 
 
 @connection_status
@@ -306,10 +307,11 @@ def unbanb_btn(update: Update, context: CallbackContext) -> str:
             chat.unban_member(user_id)
             query.message.delete()
             bot.send_video(
-            chat.id,
-            UNBAN_IMG, caption= f"❕UnBan Event• \n👮Admin: {mention_html(user.id, user.first_name)} \n👥UnbanUser: {mention_html(member.user.id, member.user.first_name)}!",
-        	    parse_mode=ParseMode.HTML,
-        	)
+                chat.id,
+                UNBAN_IMG,
+                caption=f"❕UnBan Event• \n👮Admin: {mention_html(user.id, user.first_name)} \n👥UnbanUser: {mention_html(member.user.id, member.user.first_name)}!",
+                parse_mode=ParseMode.HTML,
+            )
             bot.answer_callback_query(query.id, text="Unbanned!")
             return (
                 f"<b>{html.escape(chat.title)}:</b>\n"
@@ -329,6 +331,7 @@ def unbanb_btn(update: Update, context: CallbackContext) -> str:
         query.message.delete()
         bot.answer_callback_query(query.id, text="Deleted!")
         return ""
+
 
 @connection_status
 @bot_admin
@@ -496,7 +499,6 @@ def selfunban(context: CallbackContext, update: Update) -> str:
     return log
 
 
-        
 __help__ = """
  • `/punchme`*:* punches the user who issued the command.
  • `/kickme`*:* kicks the user who issued the command.
@@ -522,8 +524,9 @@ PUNCH_HANDLER = CommandHandler(["punch", "kick"], punch, run_async=True)
 UNBAN_HANDLER = CommandHandler("unban", unban, run_async=True)
 UNBAN_BUTTON_HANDLER = CallbackQueryHandler(unbanb_btn, pattern=r"unbanb_")
 ROAR_HANDLER = CommandHandler("roar", selfunban, run_async=True)
-PUNCHME_HANDLER = DisableAbleCommandHandler(["punchme", "kickme"], punchme, filters=Filters.chat_type.groups, run_async=True)
-
+PUNCHME_HANDLER = DisableAbleCommandHandler(
+    ["punchme", "kickme"], punchme, filters=Filters.chat_type.groups, run_async=True
+)
 
 
 dispatcher.add_handler(BAN_HANDLER)
@@ -538,7 +541,6 @@ dispatcher.add_handler(PUNCHME_HANDLER)
 __mod_name__ = "📛 ʙᴀɴ/ᴍᴜᴛᴇ"
 __handlers__ = [
     BAN_HANDLER,
-
     TEMPBAN_HANDLER,
     PUNCH_HANDLER,
     UNBAN_HANDLER,

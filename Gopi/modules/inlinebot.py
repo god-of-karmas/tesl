@@ -25,10 +25,10 @@ from tswift import Song
 from youtubesearchpython import VideosSearch
 
 from Gopi.utils.inlinehelper import (
-    inline_help_func, 
-    alive_function, 
-    translate_func, 
-    google_search_func, 
+    inline_help_func,
+    alive_function,
+    translate_func,
+    google_search_func,
     urban_func,
     webss,
     wiki_func,
@@ -39,7 +39,7 @@ from Gopi.utils.inlinehelper import (
     torrent_func,
     saavn_func,
     pokedexinfo,
-    paste_func
+    paste_func,
 )
 from Gopi.utils.pluginhelpers import fetch, json_prettify
 from Gopi import pgram, OPENWEATHERMAP_ID, TIME_API_KEY, SUPPORT_CHAT, arq

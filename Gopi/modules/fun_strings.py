@@ -9,14 +9,15 @@ JUDGE_HANDLER = (
     "𝗦𝗮𝗱!\nThis user is telling a 𝗟𝗶𝗲 😟",
     "𝗦𝗼𝗿𝗿𝘆!\nno comment on this 𝘀𝘁𝗮𝘁𝗲𝗺𝗲𝗻𝘁 🤔",
     "𝗛𝗲𝗛𝗲!\nThis user is telling the 𝗜𝘁𝘁𝘂 🤏 sa 𝘁𝗿𝘂𝘁𝗵 😉",
-    "𝗪𝗼𝗪!\nThis user is telling the 𝘁𝗿𝘂𝘁𝗵 😍" )
+    "𝗪𝗼𝗪!\nThis user is telling the 𝘁𝗿𝘂𝘁𝗵 😍",
+)
 
-DECIDE_STRINGS= ("First 𝗧𝗮𝗴 A User 𝗤𝘂𝗲𝘀𝘁𝗶𝗼𝗻 You Noob 𝗜𝘁𝘁𝘂 🤏 Sey 😂")
+DECIDE_STRINGS = "First 𝗧𝗮𝗴 A User 𝗤𝘂𝗲𝘀𝘁𝗶𝗼𝗻 You Noob 𝗜𝘁𝘁𝘂 🤏 Sey 😂"
 
-JUDGE_STRINGS= ("First 𝗧𝗮𝗴 A User 𝗦𝘁𝗮𝘁𝗲𝗺𝗲𝗻𝘁 You Noob 𝗜𝘁𝘁𝘂 🤏 Sey 😂")
+JUDGE_STRINGS = "First 𝗧𝗮𝗴 A User 𝗦𝘁𝗮𝘁𝗲𝗺𝗲𝗻𝘁 You Noob 𝗜𝘁𝘁𝘂 🤏 Sey 😂"
 
 GBAM = "<b>Beginning Of Global Bam For {user2}</b>  \n \nChat Id : <code>{chatid}</code> \nReason : <i>{reason}</i> \nGBammed By {user1}"
- 
+
 # These words for just for fun don't mind it
 GBAM_REASON = (
     "a bitch",
@@ -49,13 +50,14 @@ ALEXA_HANDLER = (
     "Any 𝗽𝗿𝗼𝗯𝗹𝗲𝗺 viro 😜",
 )
 
-ALEXA_STRINGS = ("𝗛𝗲𝗹𝗹𝗼 user how are you & how may i 𝗵𝗲𝗹𝗽 you")
+ALEXA_STRINGS = "𝗛𝗲𝗹𝗹𝗼 user how are you & how may i 𝗵𝗲𝗹𝗽 you"
 
 WISH = (
     "*hey! (first)*\n*your Wish Possible to 25%😟*",
     "*hey! (first)*\n*your Wish Possible to 50%🤔*",
     "*hey! (first)*\n*your Wish Possible to 75%😉*",
-    "*hey! (first)*\n*your Wish Possible to 100%😍*" )
+    "*hey! (first)*\n*your Wish Possible to 100%😍*",
+)
 
 ABUSE_STRINGS = (
     "Fuck off",
@@ -177,7 +179,7 @@ DARE = (
     "Declare who is your true love.",
     "Send a screenshot of your gallery.",
     "Set your crush’s picture as your dp.",
-    )
+)
 
 PAT_TEMPLATES = (
     "{user1} pats {user2} on the head.",
@@ -188,7 +190,6 @@ PAT_TEMPLATES = (
     "*{user2}'s waifu pats their head*",
     "*{user2}'s got free headpats*",
     "No pats for {user2}!",
-    
 )
 
 SLAP_ALEXA_TEMPLATES = (
@@ -199,8 +200,9 @@ SLAP_ALEXA_TEMPLATES = (
         "Stop slapping me just because I can't mute you. REEEEEEEEEE.",  # reply to admin
         "tmute",  # command
         "Shut up!",
-        "Silence!"
-    ])
+        "Silence!",
+    ],
+)
 
 SLAP_TEMPLATES = (
     "{user2} was killed by magic.",
@@ -301,12 +303,12 @@ SLAP_TEMPLATES = (
     "You know what’s worse than Dad jokes? {user2}!",
     "{user1} took all of {user2}'s cookies.",
     "{user2} wa mou.......Shindeiru! - {user1}.",
-    "{user2} lost his race piece!",  #No game no life reference
-    "Shut up {user2}, you are just {user2}.",  #No game no life reference
-    "{user1} hits {user2} with Aka si anse!",  #No game no life reference
-    "@AsadSupport scratches {user2}",  #Pixels pet cat - @AsadSupport
-    "Majin buu ate {user2}",  #Dbz
-    "Goblin slayer slays {user2}",  #Goblin Slayer
+    "{user2} lost his race piece!",  # No game no life reference
+    "Shut up {user2}, you are just {user2}.",  # No game no life reference
+    "{user1} hits {user2} with Aka si anse!",  # No game no life reference
+    "@AsadSupport scratches {user2}",  # Pixels pet cat - @AsadSupport
+    "Majin buu ate {user2}",  # Dbz
+    "Goblin slayer slays {user2}",  # Goblin Slayer
 )
 
 ITEMS = (
@@ -353,18 +355,20 @@ HIT = (
 
 PAT_GIFS = (
     "CgACAgQAAxkBAALRX19Xs7tBdOH1gQwS_rglVRkTbgVYAAKEAgACmQn9UWlyGa_xy9_aGwQ",
-    "CgACAgEAAxkBAALRYF9Xs8EnhsDfDpld3ILoqTbzDmwxAAJFAAOJxjlHECanwn69E5QbBA", 
-    "CgACAgQAAxkBAAO5X7olTkYuRTw1AV__6mFehORkP4QAAiMCAAI3KIxSjBqOTuo4xf0eBA", 
-    "CgACAgQAAxkBAAO6X7olTklDbgs9nr5bNbM9xy0uunUAAmACAAL1G4xSKOH5wmDvxy4eBA", 
+    "CgACAgEAAxkBAALRYF9Xs8EnhsDfDpld3ILoqTbzDmwxAAJFAAOJxjlHECanwn69E5QbBA",
+    "CgACAgQAAxkBAAO5X7olTkYuRTw1AV__6mFehORkP4QAAiMCAAI3KIxSjBqOTuo4xf0eBA",
+    "CgACAgQAAxkBAAO6X7olTklDbgs9nr5bNbM9xy0uunUAAmACAAL1G4xSKOH5wmDvxy4eBA",
     "CgACAgQAAxkBAAIViWDBew94TiaL_c9HyX0xpUY8wFy2AAJKAgACMU80Urc2Hvh_WMDeHwQ",
-    "CgACAgQAAxkBAAO7X7olTq_mAur7bsieTD5QnyQ06rUAAlwCAAINjoRSWyAJKJ9n2moeBA") 
+    "CgACAgQAAxkBAAO7X7olTq_mAur7bsieTD5QnyQ06rUAAlwCAAINjoRSWyAJKJ9n2moeBA",
+)
 
 PAT_STICKERS = (
     "CAACAgQAAxkBAALRWV9Xs4HH0XaXfhZe-jWaZoXfs-IsAAJYAwACdDgSEHYOt4KvL02oGwQ",
-    "CAACAgQAAxkBAALRXF9Xs6XmIeDbnoL1wiDky0TdX-CvAAKKAQAC1TMzC9A3CtiT2rqVGwQ", 
+    "CAACAgQAAxkBAALRXF9Xs6XmIeDbnoL1wiDky0TdX-CvAAKKAQAC1TMzC9A3CtiT2rqVGwQ",
     "CAACAgQAAxkBAAPCX7ol0GGF-58u9AfabFk_16ehVXEAArUAA9UzMwuz7SpKK9TonB4E",
-    "CAACAgQAAxkBAAPDX7ol2ixI5WdJ48h8rQYbc__6KisAAt8AA9UzMwusEnTVQ5yoAh4E", 
-    "CAACAgQAAxkBAAPEX7ol55uzT-EkbHOkA-_94MiMcBgAAvAAA9UzMws7KHpoG8wBjh4E") 
+    "CAACAgQAAxkBAAPDX7ol2ixI5WdJ48h8rQYbc__6KisAAt8AA9UzMwusEnTVQ5yoAh4E",
+    "CAACAgQAAxkBAAPEX7ol55uzT-EkbHOkA-_94MiMcBgAAvAAA9UzMws7KHpoG8wBjh4E",
+)
 
 SFW_STRINGS = (
     "Owww ... Such a stupid idiot.",
@@ -430,8 +434,8 @@ SFW_STRINGS = (
     "Hit Uranium with a slow moving neutron in your presence. It will be a worthwhile experience.",
     "You can be the first person to step on sun. Have a try.",
 )
-    
-  
+
+
 REPO = """━━━━━━━━━━━━━━━━━━━━━━━━
 💥 A ᴘᴏᴡᴇʀғᴜʟ ɢʀᴏᴜᴘ  ᴍᴀɴᴀɢᴇᴍᴇɴᴛ ʙᴏᴛ ᴀɴᴅ ᴍᴜꜱɪᴄ ʙᴏᴛ
 ᴏғ ♻️  🔥

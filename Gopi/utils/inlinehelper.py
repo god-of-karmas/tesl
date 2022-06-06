@@ -17,7 +17,7 @@ from pyrogram.types import (
 )
 from search_engine_parser import GoogleSearch
 
-from Gopi import OWNER_ID, pgram, arq , BOT_USERNAME
+from Gopi import OWNER_ID, pgram, arq, BOT_USERNAME
 from Gopi.utils.pluginhelpers import convert_seconds_to_minutes as time_convert
 from Gopi.utils.pluginhelpers import fetch
 
@@ -62,13 +62,14 @@ async def inline_help_func(__HELP__):
     return answerss
 
 
-
 async def alive_function(answers):
     buttons = InlineKeyboard(row_width=2)
     bot_state = "Dead" if not await app.get_me() else "Alive"
     # ubot_state = 'Dead' if not await app2.get_me() else 'Alive'
     buttons.add(
-        InlineKeyboardButton("🔐 ᴍᴀɪɴ ʙᴏᴛ", url=f"https://t.me/{BOT_USERNAME}?start=help"),
+        InlineKeyboardButton(
+            "🔐 ᴍᴀɪɴ ʙᴏᴛ", url=f"https://t.me/{BOT_USERNAME}?start=help"
+        ),
         InlineKeyboardButton("🔄 ɢᴏ ɪɴʟɪɴᴇ", switch_inline_query_current_chat=""),
     )
 
@@ -415,7 +416,7 @@ async def ping_func(answers):
     ping = Ping(ping_id=randint(696969, 6969696))
     await app.send(ping)
     t2 = time()
-    ping = f'{round(t2 - t1, 2)} Seconds'
+    ping = f"{round(t2 - t1, 2)} Seconds"
     answers.append(
         InlineQueryResultArticle(
             title=ping, input_message_content=InputTextMessageContent(f"__**{ping}**__")
@@ -451,5 +452,6 @@ async def pokedexinfo(answers, pokemon):
         )
     )
     return answers
+
 
 # Nothing

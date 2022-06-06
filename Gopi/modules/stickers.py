@@ -22,6 +22,7 @@ combot_stickers_url = "https://combot.org/telegram/stickers?q="
 
 scraper = CloudScraper()
 
+
 def stickerid(update: Update, context: CallbackContext):
     msg = update.effective_message
     if msg.reply_to_message and msg.reply_to_message.sticker:
@@ -44,8 +45,7 @@ def stickerid(update: Update, context: CallbackContext):
 
 def get_cbs_data(query, page, user_id):
     # returns (text, buttons)
-    text = scraper.get(
-        f"{combot_stickers_url}{urlquote(query)}&page={page}").text
+    text = scraper.get(f"{combot_stickers_url}{urlquote(query)}&page={page}").text
     soup = bs(text, "lxml")
     div = soup.find("div", class_="page__container")
     packs = div.find_all("a", class_="sticker-pack__btn")
@@ -58,11 +58,13 @@ def get_cbs_data(query, page, user_id):
         has_next_page = highlighted_page.next_sibling.next_sibling is not None
     buttons = []
     if has_prev_page:
-        buttons.append(InlineKeyboardButton(
-            text="⬅️", callback_data=f"cbs_{page - 1}_{user_id}"))
+        buttons.append(
+            InlineKeyboardButton(text="⬅️", callback_data=f"cbs_{page - 1}_{user_id}")
+        )
     if has_next_page:
-        buttons.append(InlineKeyboardButton(
-            text="➡️", callback_data=f"cbs_{page + 1}_{user_id}"))
+        buttons.append(
+            InlineKeyboardButton(text="➡️", callback_data=f"cbs_{page + 1}_{user_id}")
+        )
     buttons = InlineKeyboardMarkup([buttons]) if buttons else None
     text = f"Stickers for <code>{escape(query)}</code>:\nPage: {page}"
     if packs and titles:
@@ -99,11 +101,9 @@ def cbs_callback(update: Update, context: CallbackContext):
     if int(user_id) != query.from_user.id:
         query.answer("Not for you", cache_time=60 * 60)
         return
-    search_query = query.message.text.split(
-        "\n", 1)[0].split(maxsplit=2)[2][:-1]
+    search_query = query.message.text.split("\n", 1)[0].split(maxsplit=2)[2][:-1]
     text, buttons = get_cbs_data(search_query, int(page), query.from_user.id)
-    query.edit_message_text(
-        text, parse_mode=ParseMode.HTML, reply_markup=buttons)
+    query.edit_message_text(text, parse_mode=ParseMode.HTML, reply_markup=buttons)
     query.answer()
 
 
@@ -548,7 +548,9 @@ __help__ = """
 __mod_name__ = "🎉 sᴛɪᴄᴋᴇʀ"
 STICKERID_HANDLER = DisableAbleCommandHandler("stickerid", stickerid, run_async=True)
 GETSTICKER_HANDLER = DisableAbleCommandHandler("getsticker", getsticker, run_async=True)
-KANG_HANDLER = DisableAbleCommandHandler(["kang", "steal"], kang, admin_ok=True, run_async=True)
+KANG_HANDLER = DisableAbleCommandHandler(
+    ["kang", "steal"], kang, admin_ok=True, run_async=True
+)
 STICKERS_HANDLER = DisableAbleCommandHandler("stickers", cb_sticker, run_async=True)
 DEL_HANDLER = DisableAbleCommandHandler("delsticker", delsticker, run_async=True)
 

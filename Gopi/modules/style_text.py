@@ -307,7 +307,8 @@ def text5(update, context):
 
     if message.reply_to_message:
         message.reply_to_message.reply_text(string)
-            
+
+
 __help__ = """
 
  ❍ `/text1`*:* reply to the text.
@@ -341,5 +342,3 @@ __handlers__ = [TEXT2_HANDLER]
 __handlers__ = [TEXT3_HANDLER]
 __handlers__ = [TEXT4_HANDLER]
 __handlers__ = [TEXT5_HANDLER]
-
-

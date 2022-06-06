@@ -1,6 +1,6 @@
 from pyrogram import filters
 
-from Gopi import pgram #pgram
+from Gopi import pgram  # pgram
 from Gopi.utils.errors import capture_err
 from Gopi.modules.MODULESHELPER.carbonfunc import make_carbon
 
@@ -9,18 +9,15 @@ from Gopi.modules.MODULESHELPER.carbonfunc import make_carbon
 @capture_err
 async def carbon_func(_, message):
     if not message.reply_to_message:
-        return await message.reply_text(
-            "`Reply to a text message to make carbon.`"
-        )
+        return await message.reply_text("`Reply to a text message to make carbon.`")
     if not message.reply_to_message.text:
-        return await message.reply_text(
-            "`Reply to a text message to make carbon.`"
-        )
+        return await message.reply_text("`Reply to a text message to make carbon.`")
     m = await message.reply_text("`Makeing Carbon...`")
     carbon = await make_carbon(message.reply_to_message.text)
     await m.edit("`Uploading...`")
     await pgram.send_document(message.chat.id, carbon)
     await m.delete()
     carbon.close()
+
 
 # Roses are red, Violets are blue, A face like yours, Belongs in a zoo

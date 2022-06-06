@@ -200,7 +200,9 @@ async def g_blur(client, message):
         except Exception:
             return
 
+
 # Roses are red, Violets are blue, A face like yours, Belongs in a zoo
+
 
 async def box_blur(client, message):
     try:

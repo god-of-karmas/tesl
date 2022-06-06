@@ -8,28 +8,29 @@ from youtube_search import YoutubeSearch
 from Gopi import dispatcher, pgram
 from Gopi.modules.disable import DisableAbleCommandHandler
 
+
 def time_to_seconds(time):
     stringt = str(time)
-    return sum(int(x) * 60 ** i for i, x in enumerate(reversed(stringt.split(':'))))
+    return sum(int(x) * 60**i for i, x in enumerate(reversed(stringt.split(":"))))
 
 
-@pgram.on_message(filters.command(['song']))
+@pgram.on_message(filters.command(["song"]))
 def song(client, message):
-    query = ''
+    query = ""
     for i in message.command[1:]:
-        query += ' ' + str(i)
+        query += " " + str(i)
     print(query)
-    m = message.reply('🔎 **Finding the song**...')
+    m = message.reply("🔎 **Finding the song**...")
     ydl_opts = {"format": "bestaudio[ext=m4a]"}
     try:
         results = YoutubeSearch(query, max_results=1).to_dict()
         link = f"https://youtube.com{results[0]['url_suffix']}"
-        #print(results)
-        title = results[0]["title"][:40]       
+        # print(results)
+        title = results[0]["title"][:40]
         thumbnail = results[0]["thumbnails"][0]
-        thumb_name = f'thumb{title}.jpg'
+        thumb_name = f"thumb{title}.jpg"
         thumb = requests.get(thumbnail, allow_redirects=True)
-        open(thumb_name, 'wb').write(thumb.content)
+        open(thumb_name, "wb").write(thumb.content)
 
         duration = results[0]["duration"]
         views = results[0]["views"]
@@ -46,15 +47,22 @@ def song(client, message):
             info_dict = ydl.extract_info(link, download=False)
             audio_file = ydl.prepare_filename(info_dict)
             ydl.process_info(info_dict)
-        rep = f'🎙 **Title**: [{title[:15]}]({link})\n🎬 **Source**: YouTube\n⏱️ **Duration**: `{duration}`\n👁‍🗨 **Views**: `{views}`\n **Made by: @ROWDY_OF_PLUS** '
-        secmul, dur, dur_arr = 1, 0, duration.split(':')
-        for i in range(len(dur_arr)-1, -1, -1):
-            dur += (int(dur_arr[i]) * secmul)
+        rep = f"🎙 **Title**: [{title[:15]}]({link})\n🎬 **Source**: YouTube\n⏱️ **Duration**: `{duration}`\n👁‍🗨 **Views**: `{views}`\n **Made by: @ROWDY_OF_PLUS** "
+        secmul, dur, dur_arr = 1, 0, duration.split(":")
+        for i in range(len(dur_arr) - 1, -1, -1):
+            dur += int(dur_arr[i]) * secmul
             secmul *= 60
-        message.reply_audio(audio_file, caption=rep, thumb=thumb_name, parse_mode='md', title=title, duration=dur)
+        message.reply_audio(
+            audio_file,
+            caption=rep,
+            thumb=thumb_name,
+            parse_mode="md",
+            title=title,
+            duration=dur,
+        )
         m.delete()
     except Exception as e:
-        m.edit('An error Occured! \nReport at @gangs_for_udanpirappu')
+        m.edit("An error Occured! \nReport at @gangs_for_udanpirappu")
         print(e)
 
     try:
@@ -70,6 +78,4 @@ dispatcher.add_handler(SONG_HANDLER)
 
 __mod_name__ = "🎺 sᴏɴɢ"
 
-_handlers_ = [
-SONG_HANDLER 
-]
+_handlers_ = [SONG_HANDLER]
