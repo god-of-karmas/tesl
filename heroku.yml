@@ -1,0 +1,5 @@
+build:
+  docker:
+    worker: Gopifile
+run:
+  worker: python3 -m Gopi
