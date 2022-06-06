@@ -75,10 +75,11 @@ if ENV:
         "MONGO_DB_URI",
         "mongodb+srv://logesh:logesh@cluster0.z75dh.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
     )
-    DB_URI = os.environ.get(
+    DB_URL = os.environ.get(
         "DATABASE_URL",
         "postgresql://nsuzpjxvdzxjes:b6877be9131e11fdfa2b3c5d983f58ddfed6c085e817893be23bd9f9d6e94770@ec2-34-224-226-38.compute-1.amazonaws.com:5432/d3r5b8hojs47u7",
     )
+    DB_URL = DB_URL.replace("postgres://", "postgresql://", 1)
     DONATION_LINK = os.environ.get("DONATION_LINK")
     LOAD = os.environ.get("LOAD", "").split()
     NO_LOAD = os.environ.get("NO_LOAD", "translation").split()
@@ -161,8 +162,7 @@ else:
     API_ID = Config.API_ID
     API_HASH = Config.API_HASH
     BOT_USERNAME = Config.BOT_USERNAME
-
-    DB_URI = Config.SQLALCHEMY_DATABASE_URI
+    DB_URL = Config.SQLALCHEMY_DATABASE_URI
     FED_USERNAME = Config.FED_USERNAME
     MONGO_DB_URI = Config.MONGO_DB_URI
     DONATION_LINK = Config.DONATION_LINK
@@ -203,7 +203,7 @@ else:
 # install aiohttp session
 print("[Robot]: Initializing AIOHTTP Session")
 aiohttpsession = ClientSession()
-arq = ARQ("https://thearq.tech", "GKNOHX-UDSREJ-AWTSGO-XFDSCY-ARQ", aiohttpsession)
+arq = ARQ("https://arq.hamker.in", "MXQODI-TWUTPQ-TVNRMM-PFFLEW-ARQ", aiohttpsession)
 updater = tg.Updater(TOKEN, workers=WORKERS, use_context=True)
 telethn = TelegramClient("KURUMIBOT", API_ID, API_HASH)
 pgram = Client("Robot", api_id=API_ID, api_hash=API_HASH, bot_token=TOKEN)
