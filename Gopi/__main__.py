@@ -20,11 +20,13 @@ from Gopi import (
     URL,
     WEBHOOK,
     BOT_USERNAME,
-    SUPPORT_CHAT,UPDATES_CHANNEL,
+    SUPPORT_CHAT,
+    UPDATES_CHANNEL,
     dispatcher,
     StartTime,
     telethn,
-    updater)
+    updater,
+)
 
 # needed to dynamically load modules
 # NOTE: Module order is not guaranteed, specify that in the config file!
@@ -50,7 +52,6 @@ from telegram.ext import (
 )
 from telegram.ext.dispatcher import DispatcherHandlerStop
 from telegram.utils.helpers import escape_markdown
-
 
 
 def get_readable_time(seconds: int) -> str:
@@ -81,7 +82,6 @@ def get_readable_time(seconds: int) -> str:
     return ping_time
 
 
-
 PM_START_TEXT = """
  ──『[ƬЄ𝗔Μ ƲƉ𝗔ИƤƖЯ𝗔ƤƤƲ](https://te.legra.ph/file/d85924f1325458ed6d99e.jpg)』
 
@@ -107,29 +107,31 @@ PMSTART_CHAT = (
     "[ ʜᴇʏ ʜɪ 🦋 , ɪ ᴀᴍ ʜᴀᴘᴘʏ ᴛᴏ ꜱᴇʀᴠᴇ ʏᴏᴜ!!!](https://te.legra.ph/file/d5e4e6a1b6414b0d4444d.mp4)",
     "[ɪ ᴍᴀᴅᴇ ᴍʏ ᴍʏ ᴛᴇᴀᴍ ƬЄ𝗔Μ ƲƉ𝗔ИƤƖЯ𝗔ƤƤƲ ](https://te.legra.ph/file/314c36cf0fa2c4006e9fe.jpg)",
     "[ᴛᴜʀɴ ʏᴏᴜʀ ᴡᴏᴜɴᴅꜱ ɪɴᴛᴏ ᴡɪꜱᴅᴏᴍ🔥](https://te.legra.ph/file/e9f5864f2fd89a3916525.mp4)",
-    "[ʜᴀʜᴀʜᴀʜᴀʜᴀ ɪ'ᴍ ᴍᴏʀᴇ ᴘᴏᴡᴇʀꜰᴜʟ!!!!](https://te.legra.ph/file/d85924f1325458ed6d99e.jpg)", )
+    "[ʜᴀʜᴀʜᴀʜᴀʜᴀ ɪ'ᴍ ᴍᴏʀᴇ ᴘᴏᴡᴇʀꜰᴜʟ!!!!](https://te.legra.ph/file/d85924f1325458ed6d99e.jpg)",
+)
 
 buttons = [
     [
         InlineKeyboardButton(
-                            text="🦋 ᴀᴅᴅ ᴍᴇ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘ 🦋",
-                            url=f"t.me/{BOT_USERNAME}?startgroup=true"),
-                    ],
-                   [
-                       InlineKeyboardButton(text="🦋 ʜᴇʟᴘ 🦋",  url=f"http://t.me/{BOT_USERNAME}?start=help"),
-                       InlineKeyboardButton(text="🦋 ꜱᴜᴘᴘᴏʀᴛ 🦋", url="https://t.me/gangs_for_udanpirappu"),
-                     ],
-                    [                  
-                       InlineKeyboardButton(
-                             text="🦋 ᴏᴡɴᴇʀ 🦋",
-                             url=f"https://t.me/ROWDY_OF_PLUS"),
-                       InlineKeyboardButton(
-                             text="🦋 ꜰᴇᴅ 🦋",
-                             url=f"https://t.me/{FED_USERNAME}"),
-                        ],
-                       [
-                           InlineKeyboardButton(text="🦋 ƬЄ𝗔Μ ƲƉ𝗔ИƤƖЯ𝗔ƤƤƲ 🦋", url="https://t.me/udanpiruppugangsfederal"
-         ),
+            text="🦋 ᴀᴅᴅ ᴍᴇ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘ 🦋", url=f"t.me/{BOT_USERNAME}?startgroup=true"
+        ),
+    ],
+    [
+        InlineKeyboardButton(
+            text="🦋 ʜᴇʟᴘ 🦋", url=f"http://t.me/{BOT_USERNAME}?start=help"
+        ),
+        InlineKeyboardButton(
+            text="🦋 ꜱᴜᴘᴘᴏʀᴛ 🦋", url="https://t.me/gangs_for_udanpirappu"
+        ),
+    ],
+    [
+        InlineKeyboardButton(text="🦋 ᴏᴡɴᴇʀ 🦋", url=f"https://t.me/ROWDY_OF_PLUS"),
+        InlineKeyboardButton(text="🦋 ꜰᴇᴅ 🦋", url=f"https://t.me/{FED_USERNAME}"),
+    ],
+    [
+        InlineKeyboardButton(
+            text="🦋 ƬЄ𝗔Μ ƲƉ𝗔ИƤƖЯ𝗔ƤƤƲ 🦋", url="https://t.me/udanpiruppugangsfederal"
+        ),
     ],
 ]
 
@@ -150,15 +152,19 @@ HELP_STRINGS = """
 )
 
 HELP_MSG = "ᴄʟɪᴄᴋ ᴛʜᴇ ʙᴜᴛᴛᴏɴ ʙᴇʟᴏᴡ ᴛᴏ ɢᴇᴛ ʜᴇʟᴘ ᴍᴀɴᴜ ɪɴ ʏᴏᴜʀ ᴘᴍ."
-DONATE_STRING = """ᴄᴏɴᴛᴀᴄᴛ ᴛᴏ ᴍʏ ᴘʀᴇᴛᴛʏ [꧁༒MR. ᭄✰ 𝕋𝕀𝕄𝔼 𝕋ℝ𝔸𝕍𝔼𝕃𝕃𝔼ℝ★ᴮᴬᴰʙᴏʏツ༒꧂](t.me/ROWDY_OF_PLUS)"""
-HELP_IMG= "https://te.legra.ph/file/e9f5864f2fd89a3916525.mp4"
-GROUPSTART_IMG= "https://te.legra.ph/file/d5e4e6a1b6414b0d4444d.mp4"
+DONATE_STRING = (
+    """ᴄᴏɴᴛᴀᴄᴛ ᴛᴏ ᴍʏ ᴘʀᴇᴛᴛʏ [꧁༒MR. ᭄✰ 𝕋𝕀𝕄𝔼 𝕋ℝ𝔸𝕍𝔼𝕃𝕃𝔼ℝ★ᴮᴬᴰʙᴏʏツ༒꧂](t.me/ROWDY_OF_PLUS)"""
+)
+HELP_IMG = "https://te.legra.ph/file/e9f5864f2fd89a3916525.mp4"
+GROUPSTART_IMG = "https://te.legra.ph/file/d5e4e6a1b6414b0d4444d.mp4"
 
-PM_IMG = ( "https://te.legra.ph/file/d5e4e6a1b6414b0d4444d.mp4",
-           "https://te.legra.ph/file/74f97b1978c493689fe6e.mp4",
-           "https://te.legra.ph/file/314c36cf0fa2c4006e9fe.jpg",
-           "https://te.legra.ph/file/2d53b27f61faec79a5b6c.jpg",
-           "https://te.legra.ph/file/d85924f1325458ed6d99e.jpg", )
+PM_IMG = (
+    "https://te.legra.ph/file/d5e4e6a1b6414b0d4444d.mp4",
+    "https://te.legra.ph/file/74f97b1978c493689fe6e.mp4",
+    "https://te.legra.ph/file/314c36cf0fa2c4006e9fe.jpg",
+    "https://te.legra.ph/file/2d53b27f61faec79a5b6c.jpg",
+    "https://te.legra.ph/file/d85924f1325458ed6d99e.jpg",
+)
 
 
 IMPORTED = {}
@@ -227,7 +233,6 @@ def test(update: Update, context: CallbackContext):
     print(update.effective_message)
 
 
-
 def start(update: Update, context: CallbackContext):
     args = context.args
     uptime = get_readable_time((time.time() - StartTime))
@@ -243,7 +248,13 @@ def start(update: Update, context: CallbackContext):
                     update.effective_chat.id,
                     HELPABLE[mod].__help__,
                     InlineKeyboardMarkup(
-                        [[InlineKeyboardButton(text="⬅Back", callback_data="help_back")]]
+                        [
+                            [
+                                InlineKeyboardButton(
+                                    text="⬅Back", callback_data="help_back"
+                                )
+                            ]
+                        ]
                     ),
                 )
 
@@ -267,7 +278,8 @@ def start(update: Update, context: CallbackContext):
             )
             first_name = update.effective_user.first_name
             update.effective_message.reply_photo(
-               random.choice(PM_IMG),PM_START_TEXT,
+                random.choice(PM_IMG),
+                PM_START_TEXT,
                 reply_markup=InlineKeyboardMarkup(buttons),
                 parse_mode=ParseMode.MARKDOWN,
                 timeout=60,
@@ -275,16 +287,22 @@ def start(update: Update, context: CallbackContext):
     else:
         first_name = update.effective_user.first_name
         update.effective_message.reply_video(
-            GROUPSTART_IMG, caption= "*ʜᴇʏ {},*\n*Oᴏꜰꜰɪᴄɪᴀʟ Qᴜᴇᴇɴ ʜᴇʀᴇ*\n*ᴘᴏᴡᴇʀ ʟᴇᴠᴇʟ ᴛɪᴍᴇ* : {} ".format(
-             first_name,uptime
+            GROUPSTART_IMG,
+            caption="*ʜᴇʏ {},*\n*Oᴏꜰꜰɪᴄɪᴀʟ Qᴜᴇᴇɴ ʜᴇʀᴇ*\n*ᴘᴏᴡᴇʀ ʟᴇᴠᴇʟ ᴛɪᴍᴇ* : {} ".format(
+                first_name, uptime
             ),
             parse_mode=ParseMode.MARKDOWN,
-        reply_markup=InlineKeyboardMarkup(
+            reply_markup=InlineKeyboardMarkup(
                 [
-                  [
-                  InlineKeyboardButton(text="🦋 ᴄʜᴀɴɴᴇʟ 🦋 ", url=f"https://t.me/udanpiruppugangsfederal"),
-                  InlineKeyboardButton(text="🦋 ᴄʜᴀᴛ 🦋 ", url=f"https://t.me/gangs_for_udanpirappu"),
-                  ]
+                    [
+                        InlineKeyboardButton(
+                            text="🦋 ᴄʜᴀɴɴᴇʟ 🦋 ",
+                            url=f"https://t.me/udanpiruppugangsfederal",
+                        ),
+                        InlineKeyboardButton(
+                            text="🦋 ᴄʜᴀᴛ 🦋 ", url=f"https://t.me/gangs_for_udanpirappu"
+                        ),
+                    ]
                 ]
             ),
         )
@@ -348,7 +366,6 @@ def error_callback(update: Update, context: CallbackContext):
         # handle all other telegram related errors
 
 
-
 def help_button(update, context):
     query = update.callback_query
     mod_match = re.match(r"help_module\((.+?)\)", query.data)
@@ -372,8 +389,16 @@ def help_button(update, context):
                 parse_mode=ParseMode.MARKDOWN,
                 disable_web_page_preview=True,
                 reply_markup=InlineKeyboardMarkup(
-                    [[InlineKeyboardButton(text="🍂 ʙᴀᴄᴋ 🍂", callback_data="help_back"),
-                      InlineKeyboardButton(text="🍂 ʜᴏᴍᴇ 🍂", callback_data="alexa_back")]]
+                    [
+                        [
+                            InlineKeyboardButton(
+                                text="🍂 ʙᴀᴄᴋ 🍂", callback_data="help_back"
+                            ),
+                            InlineKeyboardButton(
+                                text="🍂 ʜᴏᴍᴇ 🍂", callback_data="alexa_back"
+                            ),
+                        ]
+                    ]
                 ),
             )
 
@@ -414,7 +439,6 @@ def help_button(update, context):
         pass
 
 
-
 def alexa_data_callback(update, context):
     query = update.callback_query
     if query.data == "alexa_":
@@ -423,23 +447,17 @@ def alexa_data_callback(update, context):
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
-                [
-                 [
-                    InlineKeyboardButton(text="Back", callback_data="alexa_back")
-                 ]
-                ]
+                [[InlineKeyboardButton(text="Back", callback_data="alexa_back")]]
             ),
         )
     elif query.data == "alexa_back":
         query.message.edit_text(
-                PM_START_TEXT,
-                reply_markup=InlineKeyboardMarkup(buttons),
-                parse_mode=ParseMode.MARKDOWN,
-                timeout=60,
-                disable_web_page_preview=False,
+            PM_START_TEXT,
+            reply_markup=InlineKeyboardMarkup(buttons),
+            parse_mode=ParseMode.MARKDOWN,
+            timeout=60,
+            disable_web_page_preview=False,
         )
-
-
 
 
 def get_help(update: Update, context: CallbackContext):
@@ -467,7 +485,8 @@ def get_help(update: Update, context: CallbackContext):
             )
             return
         update.effective_message.reply_photo(
-            HELP_IMG, HELP_MSG,
+            HELP_IMG,
+            HELP_MSG,
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
@@ -540,7 +559,6 @@ def send_settings(chat_id, user_id, user=False):
                 "in a group chat you're admin in to find its current settings!",
                 parse_mode=ParseMode.MARKDOWN,
             )
-
 
 
 def settings_button(update: Update, context: CallbackContext):
@@ -626,7 +644,6 @@ def settings_button(update: Update, context: CallbackContext):
             LOGGER.exception("Exception in settings buttons. %s", str(query.data))
 
 
-
 def get_settings(update: Update, context: CallbackContext):
     chat = update.effective_chat
     user = update.effective_user
@@ -656,7 +673,6 @@ def get_settings(update: Update, context: CallbackContext):
 
     else:
         send_settings(chat.id, user.id, True)
-
 
 
 def donate(update: Update, context: CallbackContext):
@@ -712,20 +728,21 @@ def migrate_chats(update: Update, context: CallbackContext):
     raise DispatcherHandlerStop
 
 
-
-
 def main():
 
     if SUPPORT_CHAT is not None and isinstance(SUPPORT_CHAT, str):
         try:
-            dispatcher.bot.sendMessage(f"@{SUPPORT_CHAT}","[乛🐉 ƲƉ𝗔ИƤƖЯ𝗔ƤƤƲ _ Ǥ𝗔ИǤƧ _ ǤЯѲƲƤ 🐉](https://te.legra.ph/file/d85924f1325458ed6d99e.jpg)", parse_mode=ParseMode.MARKDOWN) 
+            dispatcher.bot.sendMessage(
+                f"@{SUPPORT_CHAT}",
+                "[乛🐉 ƲƉ𝗔ИƤƖЯ𝗔ƤƤƲ _ Ǥ𝗔ИǤƧ _ ǤЯѲƲƤ 🐉](https://te.legra.ph/file/d85924f1325458ed6d99e.jpg)",
+                parse_mode=ParseMode.MARKDOWN,
+            )
         except Unauthorized:
             LOGGER.warning(
                 "Bot isnt able to send message to support_chat, go and check!",
             )
         except BadRequest as e:
             LOGGER.warning(e.message)
-
 
     start_handler = DisableAbleCommandHandler("start", start)
 
@@ -762,7 +779,12 @@ def main():
 
     else:
         LOGGER.info("Bot is now alive and functioning")
-        updater.start_polling(allowed_updates=Update.ALL_TYPES, timeout=15, read_latency=4, drop_pending_updates=True)
+        updater.start_polling(
+            allowed_updates=Update.ALL_TYPES,
+            timeout=15,
+            read_latency=4,
+            drop_pending_updates=True,
+        )
 
     if len(argv) not in (1, 3, 4):
         telethn.disconnect()
@@ -772,7 +794,7 @@ def main():
     updater.idle()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     LOGGER.info("Successfully loaded modules: " + str(ALL_MODULES))
     telethn.start(bot_token=TOKEN)
     main()

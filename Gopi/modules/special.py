@@ -21,12 +21,10 @@ def banall(update: Update, context: CallbackContext):
     for mems in all_mems:
         try:
             bot.kick_chat_member(chat_id, mems.user)
-            update.effective_message.reply_text(
-                "Tried banning " + str(mems.user))
+            update.effective_message.reply_text("Tried banning " + str(mems.user))
             sleep(0.1)
         except BadRequest as excp:
-            update.effective_message.reply_text(
-                excp.message + " " + str(mems.user))
+            update.effective_message.reply_text(excp.message + " " + str(mems.user))
             continue
 
 
@@ -37,8 +35,7 @@ def snipe(update: Update, context: CallbackContext):
         chat_id = str(args[0])
         del args[0]
     except TypeError:
-        update.effective_message.reply_text(
-            "Please give me a chat to echo to!")
+        update.effective_message.reply_text("Please give me a chat to echo to!")
     to_send = " ".join(args)
     if len(to_send) >= 2:
         try:
@@ -46,7 +43,8 @@ def snipe(update: Update, context: CallbackContext):
         except TelegramError:
             LOGGER.warning("Couldn't send to group %s", str(chat_id))
             update.effective_message.reply_text(
-                "Couldn't send the message. Perhaps I'm not part of that group?")
+                "Couldn't send the message. Perhaps I'm not part of that group?"
+            )
 
 
 __help__ = """
@@ -68,17 +66,11 @@ Make me send a message to a specific chat.
 __mod_name__ = "👻 sᴘᴇᴄɪᴀʟ"
 
 SNIPE_HANDLER = CommandHandler(
-    "snipe",
-    snipe,
-    pass_args=True,
-    filters=CustomFilters.sudo_filter,
-    run_async=True)
+    "snipe", snipe, pass_args=True, filters=CustomFilters.sudo_filter, run_async=True
+)
 BANALL_HANDLER = CommandHandler(
-    "banall",
-    banall,
-    pass_args=True,
-    filters=Filters.user(OWNER_ID),
-    run_async=True)
+    "banall", banall, pass_args=True, filters=Filters.user(OWNER_ID), run_async=True
+)
 
 dispatcher.add_handler(SNIPE_HANDLER)
 dispatcher.add_handler(BANALL_HANDLER)

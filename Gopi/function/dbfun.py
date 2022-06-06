@@ -1,4 +1,3 @@
-
 from Gopi import MONGO_DB_URI
 from typing import Dict, List, Union
 from pymongo import MongoClient
@@ -9,9 +8,6 @@ db = client["Gopi"]
 
 coupledb = db.couple
 karmadb = db.karma
-
-
-
 
 
 async def _get_lovers(chat_id: int):
@@ -35,9 +31,6 @@ async def save_couple(chat_id: int, date: str, couple: dict):
     lovers = await _get_lovers(chat_id)
     lovers[date] = couple
     coupledb.update_one({"chat_id": chat_id}, {"$set": {"couple": lovers}}, upsert=True)
-
-
-
 
 
 async def get_karmas_count() -> dict:
@@ -74,9 +67,6 @@ async def update_karma(chat_id: int, name: str, karma: dict):
     karmas = await get_karmas(chat_id)
     karmas[name] = karma
     karmadb.update_one({"chat_id": chat_id}, {"$set": {"karma": karmas}}, upsert=True)
-
-
-
 
 
 async def int_to_alpha(user_id: int) -> str:

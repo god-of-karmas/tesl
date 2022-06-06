@@ -28,9 +28,11 @@ async def _(event):
     if event.fwd_from:
         return
     if event.is_group:
-     if not (await is_register_admin(event.input_chat, event.message.sender_id)):
-       await event.reply("🚨 Need Admin Power.. You can't use this command.. But you can use in my pm")
-       return
+        if not (await is_register_admin(event.input_chat, event.message.sender_id)):
+            await event.reply(
+                "🚨 Need Admin Power.. You can't use this command.. But you can use in my pm"
+            )
+            return
 
     input_str = event.pattern_match.group(1)
     reply_to_id = event.message.id
@@ -71,8 +73,9 @@ async def _(event):
             event.chat_id, "k.mp3", voice_note=True, reply_to=reply_to_id
         )
         os.remove("k.mp3")
-        
-__help__="""
+
+
+__help__ = """
  *text to voice only on english*
  - `/tts`(text)*:* convert to text to voice.
  
@@ -88,5 +91,3 @@ vi,xh,yi,yo,zh,zh_CN,zh_TW,zu`
 """
 
 __mod_name__ = "🗣 TTS"
-
-

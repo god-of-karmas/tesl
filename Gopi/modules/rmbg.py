@@ -9,6 +9,7 @@ from telethon.tl import functions
 from Gopi import TEMP_DOWNLOAD_DIRECTORY, REM_BG_API_KEY, telethn as tbot
 from Gopi.events import register
 
+
 async def is_register_admin(chat, user):
     if isinstance(chat, (types.InputPeerChannel, types.InputChannel)):
         return isinstance(
@@ -91,7 +92,6 @@ def ReTrieveFile(input_file_name):
         stream=True,
     )
     return r
-
 
 
 __mod_name__ = "⚪ ʀᴇᴍᴏᴠᴇ ʙɢ"

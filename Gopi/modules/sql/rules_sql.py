@@ -56,5 +56,5 @@ def migrate_chat(old_chat_id, new_chat_id):
             chat.chat_id = str(new_chat_id)
         SESSION.commit()
 
-# Roses are red, Violets are blue, A face like yours, Belongs in a zoo
 
+# Roses are red, Violets are blue, A face like yours, Belongs in a zoo

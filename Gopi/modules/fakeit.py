@@ -5,8 +5,9 @@ from faker import Faker
 from faker.providers import internet
 from telethon import events
 
-from Gopi.modules.helper_funcs.chat_status import (is_user_admin)
+from Gopi.modules.helper_funcs.chat_status import is_user_admin
 from Gopi import telethn as Galaxy
+
 
 @Galaxy.on(events.NewMessage(pattern="/fakegen$"))
 async def hi(event):
