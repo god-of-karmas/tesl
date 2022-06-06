@@ -2,9 +2,11 @@ import importlib
 import random
 import time
 import re
+import traceback
+import json
+import html
 
 from sys import argv
-from typing import Optional
 
 from Gopi import (
     ALLOW_EXCL,
@@ -46,7 +48,7 @@ from telegram.ext import (
     Filters,
     MessageHandler,
 )
-from telegram.ext.dispatcher import DispatcherHandlerStop, run_async
+from telegram.ext.dispatcher import DispatcherHandlerStop
 from telegram.utils.helpers import escape_markdown
 
 
@@ -441,7 +443,7 @@ def alexa_data_callback(update, context):
 
 
 def get_help(update: Update, context: CallbackContext):
-    chat = update.effective_chat  # type: Optional[Chat]
+    chat = update.effective_chat
     args = update.effective_message.text.split(None, 1)
 
     # ONLY send help in PM
@@ -626,9 +628,9 @@ def settings_button(update: Update, context: CallbackContext):
 
 
 def get_settings(update: Update, context: CallbackContext):
-    chat = update.effective_chat  # type: Optional[Chat]
-    user = update.effective_user  # type: Optional[User]
-    msg = update.effective_message  # type: Optional[Message]
+    chat = update.effective_chat
+    user = update.effective_user
+    msg = update.effective_message
 
     # ONLY send settings in PM
     if chat.type != chat.PRIVATE:
@@ -659,7 +661,7 @@ def get_settings(update: Update, context: CallbackContext):
 
 def donate(update: Update, context: CallbackContext):
     user = update.effective_message.from_user
-    chat = update.effective_chat  # type: Optional[Chat]
+    chat = update.effective_chat
     bot = context.bot
     if chat.type == "private":
         update.effective_message.reply_text(
@@ -692,7 +694,7 @@ def donate(update: Update, context: CallbackContext):
 
 
 def migrate_chats(update: Update, context: CallbackContext):
-    msg = update.effective_message  # type: Optional[Message]
+    msg = update.effective_message
     if msg.migrate_to_chat_id:
         old_chat = update.effective_chat.id
         new_chat = msg.migrate_to_chat_id

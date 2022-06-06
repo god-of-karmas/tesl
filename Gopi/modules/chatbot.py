@@ -1,26 +1,25 @@
 import json
 import re
-import os
 import html
 import requests
 import Gopi.modules.sql.chatbot_sql as sql
 
 from time import sleep
+from typing import Optional
 from telegram import ParseMode
-from telegram import (CallbackQuery, Chat, MessageEntity, InlineKeyboardButton,
-                      InlineKeyboardMarkup, Message, Update, Bot, User)
+from telegram import (CallbackQuery, Chat, InlineKeyboardButton,
+                      InlineKeyboardMarkup, Update, User)
 from telegram.ext import (CallbackContext, CallbackQueryHandler, CommandHandler,
-                          DispatcherHandlerStop, Filters, MessageHandler,
-                          run_async)
+                          Filters, MessageHandler)
 from telegram.error import BadRequest, RetryAfter, Unauthorized
-from telegram.utils.helpers import mention_html, mention_markdown, escape_markdown
+from telegram.utils.helpers import mention_html
 
 from Gopi.modules.helper_funcs.filters import CustomFilters
 from Gopi.modules.helper_funcs.chat_status import user_admin, user_admin_no_reply
-from Gopi import dispatcher, updater, SUPPORT_CHAT
+from Gopi import dispatcher
 from Gopi.modules.log_channel import gloggable
 
-@run_async
+
 @user_admin_no_reply
 @gloggable
 def kukirm(update: Update, context: CallbackContext) -> str:
@@ -46,7 +45,7 @@ def kukirm(update: Update, context: CallbackContext) -> str:
 
     return ""
 
-@run_async
+
 @user_admin_no_reply
 @gloggable
 def kukiadd(update: Update, context: CallbackContext) -> str:
@@ -72,7 +71,7 @@ def kukiadd(update: Update, context: CallbackContext) -> str:
 
     return ""
 
-@run_async
+
 @user_admin
 @gloggable
 def kuki(update: Update, context: CallbackContext):
@@ -147,9 +146,9 @@ __help__ = """
 __mod_name__ = "🤖 ᴄʜᴀᴛʙᴏᴛ"
 
 
-CHATBOTK_HANDLER = CommandHandler("chatbot", kuki )
-ADD_CHAT_HANDLER = CallbackQueryHandler(kukiadd, pattern=r"add_chat" )
-RM_CHAT_HANDLER = CallbackQueryHandler(kukirm, pattern=r"rm_chat" )
+CHATBOTK_HANDLER = CommandHandler("chatbot", kuki, run_async=True)
+ADD_CHAT_HANDLER = CallbackQueryHandler(kukiadd, pattern=r"add_chat", run_async=True)
+RM_CHAT_HANDLER = CallbackQueryHandler(kukirm, pattern=r"rm_chat", run_async=True)
 CHATBOT_HANDLER = MessageHandler(
     Filters.text & (~Filters.regex(r"^#[^\s]+") & ~Filters.regex(r"^!")
                     & ~Filters.regex(r"^\/")), chatbot, )

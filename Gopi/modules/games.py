@@ -1,5 +1,4 @@
 from telethon.tl.types import InputMediaDice
-
 from Gopi.events import register
 
 

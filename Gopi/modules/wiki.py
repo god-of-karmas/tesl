@@ -1,12 +1,12 @@
 import wikipedia
+
+from telegram import ParseMode, Update
+from telegram.ext import CallbackContext
+from wikipedia.exceptions import DisambiguationError, PageError
 from Gopi import dispatcher
 from Gopi.modules.disable import DisableAbleCommandHandler
-from telegram import ParseMode, Update
-from telegram.ext import CallbackContext, run_async
-from wikipedia.exceptions import DisambiguationError, PageError
 
 
-@run_async
 def wiki(update: Update, context: CallbackContext):
     msg = update.effective_message.reply_to_message if update.effective_message.reply_to_message else update.effective_message
     res = ""
@@ -45,5 +45,5 @@ def wiki(update: Update, context: CallbackContext):
                 disable_web_page_preview=True)
 
 
-WIKI_HANDLER = DisableAbleCommandHandler("wiki", wiki)
+WIKI_HANDLER = DisableAbleCommandHandler("wiki", wiki, run_async=True)
 dispatcher.add_handler(WIKI_HANDLER)

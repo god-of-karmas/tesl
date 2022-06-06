@@ -3,14 +3,13 @@ from io import BytesIO
 
 from PIL import Image
 from telegram import Update
-from telegram.ext import CallbackContext, run_async
+from telegram.ext import CallbackContext
 
 from Gopi import dispatcher
 from Gopi.modules.disable import DisableAbleCommandHandler
 from Gopi.modules.thonkify_dict import thonkifydict
 
 
-@run_async
 def plet(update: Update, context: CallbackContext):
     message = update.effective_message
     if not message.reply_to_message:
@@ -61,7 +60,7 @@ def plet(update: Update, context: CallbackContext):
         context.bot.send_sticker(chat_id=message.chat_id, sticker=buffer)
 
 
-PLET_HANDLER = DisableAbleCommandHandler("plet", plet)
+PLET_HANDLER = DisableAbleCommandHandler("plet", plet, run_async=True)
 
 dispatcher.add_handler(PLET_HANDLER)
 

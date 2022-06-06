@@ -3,18 +3,20 @@ import html
 import nekos
 import requests
 from PIL import Image
-from telegram import ParseMode
-from Gopi import dispatcher, updater
+from time import sleep
+
 import Gopi.modules.sql.nsfw_sql as sql
+from Gopi import dispatcher
 from Gopi.modules.log_channel import gloggable
-from telegram import Message, Chat, Update, Bot, MessageEntity
-from telegram.error import BadRequest, RetryAfter, Unauthorized
-from telegram.ext import CommandHandler, run_async, CallbackContext
 from Gopi.modules.helper_funcs.filters import CustomFilters
 from Gopi.modules.helper_funcs.chat_status import user_admin
-from telegram.utils.helpers import mention_html, mention_markdown, escape_markdown
 
-@run_async
+from telegram import Update
+from telegram.error import BadRequest, RetryAfter, Unauthorized
+from telegram.ext import CommandHandler, CallbackContext
+from telegram.utils.helpers import mention_html
+
+
 @user_admin
 @gloggable
 def add_nsfw(update: Update, context: CallbackContext):
@@ -36,7 +38,6 @@ def add_nsfw(update: Update, context: CallbackContext):
         return ""
 
 
-@run_async
 @user_admin
 @gloggable
 def rem_nsfw(update: Update, context: CallbackContext):
@@ -57,7 +58,7 @@ def rem_nsfw(update: Update, context: CallbackContext):
         )
         return message
 
-@run_async
+
 def list_nsfw_chats(update: Update, context: CallbackContext):
     chats = sql.get_all_nsfw_chats()
     text = "<b>NSFW Activated Chats</b>\n"
@@ -75,19 +76,18 @@ def list_nsfw_chats(update: Update, context: CallbackContext):
     update.effective_message.reply_text(text, parse_mode="HTML")
 
 
-@run_async
 def neko(update, context):
     msg = update.effective_message
     target = "neko"
     msg.reply_photo(nekos.img(target))
 
-@run_async
+
 def wallpaper(update, context):
     msg = update.effective_message
     target = "wallpaper"
     msg.reply_photo(nekos.img(target))
     
-@run_async
+
 def ngif(update, context):
     chat_id = update.effective_chat.id
     if not update.effective_message.chat.type == "private":
@@ -98,13 +98,13 @@ def ngif(update, context):
     target = "ngif"
     msg.reply_video(nekos.img(target))
 
-@run_async
+
 def feed(update, context):
     msg = update.effective_message
     target = "feed"
     msg.reply_video(nekos.img(target))
 
-@run_async
+
 def kemonomimi(update, context):
     chat_id = update.effective_chat.id
     if not update.effective_message.chat.type == "private":
@@ -115,7 +115,7 @@ def kemonomimi(update, context):
     target = "kemonomimi"
     msg.reply_photo(nekos.img(target))
 
-@run_async
+
 def gasm(update, context):
     chat_id = update.effective_chat.id
     if not update.effective_message.chat.type == "private":
@@ -132,46 +132,44 @@ def gasm(update, context):
     os.remove("temp.webp")
 
 
-@run_async
 def poke(update, context):
     msg = update.effective_message
     target = "poke"
     msg.reply_video(nekos.img(target))
 
-@run_async
+
 def holo(update, context):
     msg = update.effective_message
     target = "holo"
     msg.reply_photo(nekos.img(target))
 
-@run_async
+
 def smug(update, context):
     msg = update.effective_message
     target = "smug"
     msg.reply_video(nekos.img(target))
 
 
-@run_async
 def baka(update, context):
     msg = update.effective_message
     target = "baka"
     msg.reply_video(nekos.img(target))
 
 
-ADD_NSFW_HANDLER = CommandHandler("addnsfw", add_nsfw)
-REMOVE_NSFW_HANDLER = CommandHandler("rmnsfw", rem_nsfw)
+ADD_NSFW_HANDLER = CommandHandler("addnsfw", add_nsfw, run_async=True)
+REMOVE_NSFW_HANDLER = CommandHandler("rmnsfw", rem_nsfw, run_async=True)
 LIST_NSFW_CHATS_HANDLER = CommandHandler(
-    "nsfwchats", list_nsfw_chats, filters=CustomFilters.dev_filter)
-NEKO_HANDLER = CommandHandler("neko", neko)
-WALLPAPER_HANDLER = CommandHandler("wallpaper", wallpaper)
-NGIF_HANDLER = CommandHandler("ngif", ngif)
-FEED_HANDLER = CommandHandler("feed", feed)
-KEMONOMIMI_HANDLER = CommandHandler("kemonomimi", kemonomimi)
-GASM_HANDLER = CommandHandler("gasm", gasm)
-POKE_HANDLER = CommandHandler("poke", poke)
-HOLO_HANDLER = CommandHandler("holo", holo)
-SMUG_HANDLER = CommandHandler("smug", smug)
-BAKA_HANDLER = CommandHandler("baka", baka)
+    "nsfwchats", list_nsfw_chats, filters=CustomFilters.dev_filter, run_async=True)
+NEKO_HANDLER = CommandHandler("neko", neko, run_async=True)
+WALLPAPER_HANDLER = CommandHandler("wallpaper", wallpaper, run_async=True)
+NGIF_HANDLER = CommandHandler("ngif", ngif, run_async=True)
+FEED_HANDLER = CommandHandler("feed", feed, run_async=True)
+KEMONOMIMI_HANDLER = CommandHandler("kemonomimi", kemonomimi, run_async=True)
+GASM_HANDLER = CommandHandler("gasm", gasm, run_async=True)
+POKE_HANDLER = CommandHandler("poke", poke, run_async=True)
+HOLO_HANDLER = CommandHandler("holo", holo, run_async=True)
+SMUG_HANDLER = CommandHandler("smug", smug, run_async=True)
+BAKA_HANDLER = CommandHandler("baka", baka, run_async=True)
 
 
 dispatcher.add_handler(ADD_NSFW_HANDLER)

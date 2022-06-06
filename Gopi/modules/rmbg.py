@@ -1,13 +1,13 @@
 import io
 import os
+import requests
 from datetime import datetime
 
-import requests
 from telethon import types
 from telethon.tl import functions
 
-from Gopi.events import register
 from Gopi import TEMP_DOWNLOAD_DIRECTORY, REM_BG_API_KEY, telethn as tbot
+from Gopi.events import register
 
 async def is_register_admin(chat, user):
     if isinstance(chat, (types.InputPeerChannel, types.InputChannel)):

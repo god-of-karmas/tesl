@@ -1,11 +1,10 @@
 import asyncio
 import math
 import os
-
 import heroku3
 import requests
 
-from Gopi import telethn as borg, HEROKU_APP_NAME, HEROKU_API_KEY, OWNER_ID
+from Gopi import HEROKU_APP_NAME, HEROKU_API_KEY, OWNER_ID
 from Gopi.events import register
 
 heroku_api = "https://api.heroku.com"

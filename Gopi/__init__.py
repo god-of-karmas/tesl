@@ -3,12 +3,11 @@ import os
 import sys
 import time
 import spamwatch
+import telegram.ext as tg
+
 from aiohttp import ClientSession
 from Python_ARQ import ARQ
-import telegram.ext as tg
-from redis import StrictRedis
-from pyrogram import Client, errors
-
+from pyrogram import Client
 from telethon import TelegramClient
 
 StartTime = time.time()

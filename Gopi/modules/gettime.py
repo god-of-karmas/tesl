@@ -1,11 +1,11 @@
 import datetime
+import requests
 from typing import List
 
-import requests
 from Gopi import TIME_API_KEY, dispatcher
 from Gopi.modules.disable import DisableAbleCommandHandler
 from telegram import ParseMode, Update
-from telegram.ext import CallbackContext, run_async
+from telegram.ext import CallbackContext
 
 
 def generate_time(to_find: str, findtype: List[str]) -> str:
@@ -58,7 +58,6 @@ def generate_time(to_find: str, findtype: List[str]) -> str:
     return result
 
 
-@run_async
 def gettime(update: Update, context: CallbackContext):
     message = update.effective_message
 
@@ -96,7 +95,7 @@ __help__ = """
 • 🕐 [Timezones list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)
 """
 
-TIME_HANDLER = DisableAbleCommandHandler("time", gettime)
+TIME_HANDLER = DisableAbleCommandHandler("time", gettime, run_async=True)
 
 dispatcher.add_handler(TIME_HANDLER)
 

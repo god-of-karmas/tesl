@@ -1,28 +1,21 @@
-from bs4 import BeautifulSoup
 import urllib
-from Gopi import telethn as tbot
 import glob
 import io
 import os
 import re
-import aiohttp
 import urllib.request
-from urllib.parse import urlencode
 import requests
+import bs4
+
 from bs4 import BeautifulSoup
 from PIL import Image
 from search_engine_parser import GoogleSearch
-
-import bs4
-import html2text
 from bing_image_downloader import downloader
 from telethon import *
-from telethon.tl import functions
-from telethon.tl import types
 from telethon.tl.types import *
 
 from Gopi import *
-
+from Gopi import telethn as tbot
 from Gopi.events import register
 
 opener = urllib.request.build_opener()

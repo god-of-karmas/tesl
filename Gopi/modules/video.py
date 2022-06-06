@@ -1,10 +1,14 @@
-import asyncio, time, os, asyncio, json
+import asyncio
+import time
+import os
+import asyncio
+import json
+
 from telethon.tl.types import DocumentAttributeAudio
 from Gopi.events import register
 from Gopi.utils import progress
 from youtube_dl import YoutubeDL
 from youtube_dl.utils import (DownloadError, ContentTooShortError,
-
                               ExtractorError, GeoRestrictedError,
                               MaxDownloadsReached, PostProcessingError,
                               UnavailableVideoError, XAttrMetadataError)

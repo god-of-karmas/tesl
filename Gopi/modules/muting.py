@@ -55,7 +55,6 @@ def check_user(user_id: int, bot: Bot, chat: Chat) -> Optional[str]:
     return None
 
 
-@run_async
 @connection_status
 @bot_admin
 @user_admin
@@ -112,7 +111,6 @@ def mute(update: Update, context: CallbackContext) -> str:
     return ""
 
 
-@run_async
 @connection_status
 @bot_admin
 @user_admin
@@ -170,7 +168,6 @@ def unmute(update: Update, context: CallbackContext) -> str:
     return ""
 
 
-@run_async
 @connection_status
 @bot_admin
 @can_restrict
@@ -278,7 +275,7 @@ def button(update: Update, context: CallbackContext) -> str:
         unmuted = bot.restrict_chat_member(chat.id, int(user_id), chat_permissions)
         if unmuted:
         	update.effective_message.edit_text(
-        	    f"Admin {mention_html(user.id, user.first_name)} Unmuted {mention_html(member.user.id, member.user.first_name)}!",
+        	    f"{mention_html(member.user.id, member.user.first_name)} [<code>{member.user.id}</code>] Now can 🔊 speak again.",
         	    parse_mode=ParseMode.HTML,
         	)
         	query.answer("Unmuted!")
@@ -290,13 +287,13 @@ def button(update: Update, context: CallbackContext) -> str:
                 )
     else:
         update.effective_message.edit_text(
-            "This user is not muted or has left the group!"
+            "⚠️ This user is not muted or has left the group!"
         )
         return ""
 
-MUTE_HANDLER = CommandHandler("mute", mute)
-UNMUTE_HANDLER = CommandHandler("unmute", unmute)
-TEMPMUTE_HANDLER = CommandHandler(["tmute", "tempmute"], temp_mute)
+MUTE_HANDLER = CommandHandler("mute", mute, run_async=True)
+UNMUTE_HANDLER = CommandHandler("unmute", unmute, run_async=True)
+TEMPMUTE_HANDLER = CommandHandler(["tmute", "tempmute"], temp_mute, run_async=True)
 UNMUTE_BUTTON_HANDLER = CallbackQueryHandler(button, pattern=r"unmute_")
 
 dispatcher.add_handler(MUTE_HANDLER)

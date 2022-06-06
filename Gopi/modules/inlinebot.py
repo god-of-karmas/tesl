@@ -2,11 +2,11 @@ import datetime
 import re
 import time
 import urllib.request
-from datetime import datetime
-from typing import List
-
 import aiohttp
 import requests
+from datetime import datetime
+
+from typing import List
 from bs4 import BeautifulSoup
 from countryinfo import CountryInfo
 from faker import Faker
@@ -24,9 +24,25 @@ from search_engine_parser import GoogleSearch
 from tswift import Song
 from youtubesearchpython import VideosSearch
 
-from Gopi.utils.inlinehelper import *
+from Gopi.utils.inlinehelper import (
+    inline_help_func, 
+    alive_function, 
+    translate_func, 
+    google_search_func, 
+    urban_func,
+    webss,
+    wiki_func,
+    ping_func,
+    shortify,
+    wall_func,
+    deezer_func,
+    torrent_func,
+    saavn_func,
+    pokedexinfo,
+    paste_func
+)
 from Gopi.utils.pluginhelpers import fetch, json_prettify
-from Gopi import pgram, OPENWEATHERMAP_ID, TIME_API_KEY, SUPPORT_CHAT
+from Gopi import pgram, OPENWEATHERMAP_ID, TIME_API_KEY, SUPPORT_CHAT, arq
 
 dictionary = PyDictionary()
 

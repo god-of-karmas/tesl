@@ -1,18 +1,11 @@
-from telethon import events, Button, custom, version
-from telethon.tl.types import ChannelParticipantsAdmins
 import asyncio
-import os,re
-import requests
+import re
 import datetime
-import time
+
+from telethon import events, custom
 from datetime import datetime
-import random
-from PIL import Image
-from io import BytesIO
 from Gopi import telethn as bot
-from Gopi import telethn as tgbot
 from Gopi.events import register
-from Gopi import dispatcher
 
 
 edit_time = 5
@@ -60,7 +53,7 @@ async def proboyx(event):
     await asyncio.sleep(edit_time)
     ok7 = await bot.edit_message(event.chat_id, ok6, file=file4, buttons=button)
 
-@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"information")))
+@bot.on(events.callbackquery.CallbackQuery(data=re.compile(b"information")))
 async def callback_query_handler(event):
   try:
     boy = event.sender_id

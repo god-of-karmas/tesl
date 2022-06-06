@@ -1,4 +1,3 @@
-from Gopi import telethn as tbot
 import os
 
 from gtts import gTTS
@@ -8,8 +7,7 @@ from telethon.tl import functions
 from telethon.tl import types
 from telethon.tl.types import *
 
-from Gopi import *
-
+from Gopi import telethn as tbot
 from Gopi.events import register
 
 

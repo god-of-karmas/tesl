@@ -1,11 +1,9 @@
-
 from Gopi.modules.helper_funcs.chat_status import user_admin
 from Gopi.modules.disable import DisableAbleCommandHandler
 from Gopi import dispatcher
 
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup
-from telegram import MessageEntity, ParseMode, Update
-from telegram.ext.dispatcher import run_async
+from telegram import ParseMode, Update
 from telegram.ext import CallbackContext, Filters, CommandHandler
 
 MARKDOWN_HELP = f"""
@@ -33,7 +31,6 @@ Keep in mind that your message <b>MUST</b> contain some text other than just a b
 """
 
 
-@run_async
 @user_admin
 def echo(update: Update, context: CallbackContext):
     args = update.effective_message.text.split(None, 1)
@@ -63,7 +60,6 @@ def markdown_help_sender(update: Update):
         "[button2](buttonurl://google.com:same)")
 
 
-@run_async
 def markdown_help(update: Update, context: CallbackContext):
     if update.effective_chat.type != "private":
         update.effective_message.reply_text(
@@ -100,8 +96,8 @@ Output: `1.0 USD = 75.505 INR`
 Reports bugs at [LG Server](t.me/aboutlogesh)
 """
 
-ECHO_HANDLER = DisableAbleCommandHandler("echo", echo, filters=Filters.group)
-MD_HELP_HANDLER = CommandHandler("markdownhelp", markdown_help)
+ECHO_HANDLER = DisableAbleCommandHandler("echo", echo, filters=Filters.chat_type.groups, run_async=True)
+MD_HELP_HANDLER = CommandHandler("markdownhelp", markdown_help, run_async=True)
 
 dispatcher.add_handler(ECHO_HANDLER)
 dispatcher.add_handler(MD_HELP_HANDLER)

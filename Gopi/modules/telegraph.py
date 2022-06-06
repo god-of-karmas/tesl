@@ -1,16 +1,17 @@
-from Gopi.events import register
-from Gopi import telethn as tbot
-TMP_DOWNLOAD_DIRECTORY = "./"
-from telethon import events
 import os
+
 from PIL import Image
 from datetime import datetime
 from telegraph import Telegraph, upload_file, exceptions
+
+from Gopi import telethn as tbot
+from Gopi.events import register
+
 emilia = "EMILIA"
 telegraph = Telegraph()
 r = telegraph.create_account(short_name=emilia)
 auth_url = r["auth_url"]
-
+TMP_DOWNLOAD_DIRECTORY = "./"
 
 @register(pattern="^/t(m|xt) ?(.*)")
 async def _(event):

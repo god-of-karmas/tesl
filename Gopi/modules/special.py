@@ -1,19 +1,18 @@
 from time import sleep
-from typing import Optional, List
+
 from telegram import TelegramError
 from telegram import Update
 from telegram.error import BadRequest
 from telegram.ext import Filters, CommandHandler
-from telegram.ext.dispatcher import run_async, CallbackContext
+from telegram.ext.dispatcher import CallbackContext
 
-import random
 import Gopi.modules.sql.users_sql as sql
 from Gopi.modules.helper_funcs.filters import CustomFilters
 from Gopi import dispatcher, OWNER_ID, LOGGER
-from Gopi.modules.disable import DisableAbleCommandHandler
+
 USERS_GROUP = 4
 
-@run_async
+
 def banall(update: Update, context: CallbackContext):
     args = context.args
     bot = context.bot
@@ -31,7 +30,6 @@ def banall(update: Update, context: CallbackContext):
             continue
 
 
-@run_async
 def snipe(update: Update, context: CallbackContext):
     args = context.args
     bot = context.bot
@@ -73,12 +71,14 @@ SNIPE_HANDLER = CommandHandler(
     "snipe",
     snipe,
     pass_args=True,
-    filters=CustomFilters.sudo_filter)
+    filters=CustomFilters.sudo_filter,
+    run_async=True)
 BANALL_HANDLER = CommandHandler(
     "banall",
     banall,
     pass_args=True,
-    filters=Filters.user(OWNER_ID))
+    filters=Filters.user(OWNER_ID),
+    run_async=True)
 
 dispatcher.add_handler(SNIPE_HANDLER)
 dispatcher.add_handler(BANALL_HANDLER)

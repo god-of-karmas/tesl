@@ -1,14 +1,12 @@
 import os
 import requests
-import aiohttp
 import youtube_dl
 
 from pyrogram import filters
-from Gopi import pgram
 from youtube_search import YoutubeSearch
-from Gopi.pyroerror import capture_err
+
+from Gopi import dispatcher, pgram
 from Gopi.modules.disable import DisableAbleCommandHandler
-from Gopi import dispatcher
 
 def time_to_seconds(time):
     stringt = str(time)
@@ -17,11 +15,6 @@ def time_to_seconds(time):
 
 @pgram.on_message(filters.command(['song']))
 def song(client, message):
-
-    user_id = message.from_user.id 
-    user_name = message.from_user.first_name 
-    rpk = "["+user_name+"](tg://user?id="+str(user_id)+")"
-
     query = ''
     for i in message.command[1:]:
         query += ' ' + str(i)
@@ -38,9 +31,7 @@ def song(client, message):
         thumb = requests.get(thumbnail, allow_redirects=True)
         open(thumb_name, 'wb').write(thumb.content)
 
-
         duration = results[0]["duration"]
-        url_suffix = results[0]["url_suffix"]
         views = results[0]["views"]
 
     except Exception as e:

@@ -2,7 +2,6 @@ from Gopi import dispatcher
 from Gopi.modules.disable import DisableAbleCommandHandler
 from Gopi.modules.helper_funcs.alternate import typing_action
 from telegram import ParseMode
-from telegram.ext import run_async
 
 normiefont = [
     "a",
@@ -177,7 +176,6 @@ text5font = [
 ]
 
 
-@run_async
 @typing_action
 def text1(update, context):
     args = context.args
@@ -205,7 +203,6 @@ def text1(update, context):
         message.reply_text(string)
 
 
-@run_async
 @typing_action
 def text2(update, context):
     args = context.args
@@ -233,7 +230,6 @@ def text2(update, context):
         message.reply_text(string)
 
 
-@run_async
 @typing_action
 def text3(update, context):
     args = context.args
@@ -261,7 +257,6 @@ def text3(update, context):
         message.reply_text(string)
 
 
-@run_async
 @typing_action
 def text4(update, context):
     args = context.args
@@ -289,7 +284,6 @@ def text4(update, context):
         message.reply_text(string)
 
 
-@run_async
 @typing_action
 def text5(update, context):
     args = context.args
@@ -324,11 +318,11 @@ __help__ = """
 """
 __mod_name__ = "🎇 sᴛʏʟᴇᴛᴇxᴛ"
 
-TEXT1_HANDLER = DisableAbleCommandHandler("text1", text1)
-TEXT2_HANDLER = DisableAbleCommandHandler("text2", text2)
-TEXT3_HANDLER = DisableAbleCommandHandler("text3", text3)
-TEXT4_HANDLER = DisableAbleCommandHandler("text4", text4)
-TEXT5_HANDLER = DisableAbleCommandHandler("text5", text5)
+TEXT1_HANDLER = DisableAbleCommandHandler("text1", text1, run_async=True)
+TEXT2_HANDLER = DisableAbleCommandHandler("text2", text2, run_async=True)
+TEXT3_HANDLER = DisableAbleCommandHandler("text3", text3, run_async=True)
+TEXT4_HANDLER = DisableAbleCommandHandler("text4", text4, run_async=True)
+TEXT5_HANDLER = DisableAbleCommandHandler("text5", text5, run_async=True)
 
 dispatcher.add_handler(TEXT1_HANDLER)
 dispatcher.add_handler(TEXT2_HANDLER)

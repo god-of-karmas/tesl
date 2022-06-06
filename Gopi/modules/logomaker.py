@@ -1,10 +1,12 @@
 import os
 import random
 import glob
+
 from PIL import Image, ImageDraw, ImageFont
 from telethon.tl.types import InputMessagesFilterPhotos
-from Gopi.events import register
+
 from Gopi import telethn as tbot, pgram
+from Gopi.events import register
 
 
 def mediainfo(media):

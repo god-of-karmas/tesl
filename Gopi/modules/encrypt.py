@@ -1,7 +1,5 @@
-from Gopi import telethn as tbot
-import os
-from Gopi.events import register
 import secureme
+from Gopi.events import register
 
 @register(pattern="^/encrypt ?(.*)")
 async def hmm(event):

@@ -1,5 +1,7 @@
 import html
-from typing import Optional, List
+import re
+
+from typing import Optional
 
 from telegram import Message, Chat, Update, User, ChatPermissions
 
@@ -11,15 +13,14 @@ from Gopi.modules.helper_funcs.chat_status import (bot_admin,
 from Gopi.modules.log_channel import loggable
 from Gopi.modules.sql import antiflood_sql as sql
 from telegram.error import BadRequest
-from telegram.ext import CallbackContext, CallbackQueryHandler, CommandHandler, Filters, MessageHandler, run_async
-from telegram.utils.helpers import mention_html, escape_markdown
+from telegram.ext import CallbackContext, CallbackQueryHandler, CommandHandler, Filters, MessageHandler
+from telegram.utils.helpers import mention_html
 from Gopi.modules.helper_funcs.string_handling import extract_time
 from Gopi.modules.connection import connected
 from Gopi.modules.helper_funcs.alternate import send_message
 FLOOD_GROUP = 3
 
 
-@run_async
 @loggable
 def check_flood(update, context) -> str:
     user = update.effective_user  # type: Optional[User]
@@ -88,7 +89,6 @@ def check_flood(update, context) -> str:
                "\nDon't have enough permission to restrict users so automatically disabled anti-flood".format(chat.title)
 
 
-@run_async
 @user_admin_no_reply
 @bot_admin
 def flood_button(update: Update, context: CallbackContext):
@@ -115,7 +115,6 @@ def flood_button(update: Update, context: CallbackContext):
             pass
 
 
-@run_async
 @user_admin
 @loggable
 def set_flood(update, context) -> str:
@@ -194,7 +193,6 @@ def set_flood(update, context) -> str:
     return ""
 
 
-@run_async
 def flood(update, context):
     chat = update.effective_chat  # type: Optional[Chat]
     user = update.effective_user  # type: Optional[User]
@@ -230,7 +228,6 @@ def flood(update, context):
                 .format(limit))
 
 
-@run_async
 @user_admin
 def set_flood_mode(update, context):
     chat = update.effective_chat  # type: Optional[Chat]
@@ -357,13 +354,13 @@ will result in restricting that user.
 __mod_name__ = "🔕 ғʟᴏᴏᴅ"
 
 FLOOD_BAN_HANDLER = MessageHandler(
-    Filters.all & ~Filters.status_update & Filters.group, check_flood)
-SET_FLOOD_HANDLER = CommandHandler("setflood", set_flood, filters=Filters.group)
+    Filters.all & ~Filters.status_update & Filters.group, check_flood, run_async=True)
+SET_FLOOD_HANDLER = CommandHandler("setflood", set_flood, filters=Filters.chat_type.groups, run_async=True)
 SET_FLOOD_MODE_HANDLER = CommandHandler(
-    "setfloodmode", set_flood_mode, pass_args=True)  #, filters=Filters.group)
+    "setfloodmode", set_flood_mode, pass_args=True, run_async=True)  #, filters=Filters.chat_type.groups)
 FLOOD_QUERY_HANDLER = CallbackQueryHandler(
-    flood_button, pattern=r"unmute_flooder")
-FLOOD_HANDLER = CommandHandler("flood", flood, filters=Filters.group)
+    flood_button, pattern=r"unmute_flooder", run_async=True)
+FLOOD_HANDLER = CommandHandler("flood", flood, filters=Filters.chat_type.groups, run_async=True)
 
 dispatcher.add_handler(FLOOD_BAN_HANDLER, FLOOD_GROUP)
 dispatcher.add_handler(FLOOD_QUERY_HANDLER)
