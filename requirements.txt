@@ -78,7 +78,7 @@ ujson
 pretty_errors
 pygithub
 TgCrypto
-pyrogram==1.4.16
+pyrogram==2.0.26
 PyDictionary
 git+https://github.com/Sorrybabe/downloader
 youtube_search_python==1.4.9
@@ -132,7 +132,7 @@ hachoir
 pybase64
 pySmartDL
 validators
-pyrogram==1.4.16
+pyrogram==2.0.26
 datetime
 nltk
 aiohttp
