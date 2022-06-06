@@ -1,4 +1,4 @@
-## ✨ Easy To Deploy Direct In Repo✨
+## Easy To Deploy Direct In Repo
 
 The Easiest Way To Deploy This Bot Direct From GitHub
 
